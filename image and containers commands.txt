@@ -1,0 +1,92 @@
+List all Docker images
+
+docker images
+
+
+Build a Docker image
+docker build -t image_name:tag .
+# Example: docker build -t nodeapplicationn:latest .
+
+Remove a Docker image
+docker rmi image_name:tag
+# Example: docker rmi nodeapplicationn:latest
+
+
+Remove unused Docker images
+docker image prune
+
+
+Docker Container Commands
+List all running containersdocker ps
+
+
+List all containers (including stopped ones)
+docker ps -a
+
+
+Run a container
+docker run -d --name container_name -p host_port:container_port image_name:tag
+# Example: docker run -d --name my_node_app -p 5500:5500 nodeapplicationn:latest
+
+
+Run a container with a volume
+docker run -d --name container_name -p host_port:container_port -v /path/on/host:/path/in/container image_name:tag
+# Example: docker run -d --name my_node_app -p 5500:5500 -v ${PWD}:/app nodeapplicationn:latest
+
+
+Stop a running container
+docker stop container_name_or_id
+# Example: docker stop my_node_app
+
+
+Start a stopped container
+docker start container_name_or_id
+# Example: docker start my_node_app
+
+
+Remove a stopped container
+docker rm container_name_or_id
+# Example: docker rm my_node_app
+
+
+Remove all stopped containers
+docker container prune
+
+
+View logs of a container
+docker logs container_name_or_id
+# Example: docker logs my_node_app
+Example Workflow
+
+Build the Docker image:
+docker build -t nodeapplicationn:latest .
+
+
+Run a container from the image:
+docker run -d --name my_node_app -p 5500:5500 -v ${PWD}:/app nodeapplicationn:latest
+docker run --name name_of_the_container -p 5500:5500 image_name
+
+View running containers:
+docker ps
+
+Stop the running container:
+docker stop my_node_app
+
+
+Start the stopped container:
+docker start my_node_app
+
+
+Remove the stopped container:
+docker rm my_node_app
+
+
+Remove the Docker image:
+docker rmi nodeapplicationn:latest
+
+
+
+
+docker system prune -a = to remove all the images and containers
+
+to add the volume in the docker folder = docker run --name basic-container -p 5500:5500 --rm -v D:\Docker\nodeJsApplication :/app basic app 

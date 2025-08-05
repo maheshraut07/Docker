@@ -1,0 +1,86 @@
+**simple docker file for node js application 
+
+// It is the base image 
+
+FROM node:slim
+
+// define the working directory i.e where do you want to set the working directory location 
+
+WORKDIR /app
+
+// define the which directory and files you want to copy to your docker working directory . you can make the .dockerignore file for the same to ignore the which file you want to ignore 
+
+COPY (source) (destination)
+COPY . /app
+
+// run the commands 
+
+RUN npm install
+
+// you need to expose the port for running our application 
+
+EXPOSE 3000
+
+// we actually run our command by executing the command node index.js
+
+CMD node index.js
+
+
+
+**final code 
+
+FROM node:slim
+WORKDIR /app
+COPY . /app
+RUN npm install
+EXPOSE 3000
+CMD node index.js
+
+
+
+**docker command regarding image 
+1) docker build -t image_name = build dokcer with tag name (-t) and image_name(name of the image)
+
+   docker build -t maheshraut07/hey-nodejs:0.0.1.RELEASE .
+
+2) docker container run -d -p 3000:5000 maheshraut07/hey-nodejs:0.0.1.RELEASE (3000 port on the local machine , 5000 port on the docker)
+
+3) docker push maheshraut07/hey-nodejs:0.0.1.RELEASE (to push the image  to docker hub)
+
+
+
+
+
+
+
+
+
+
+** command for containers 
+1) docker container ls (list of the name of the running containers )
+2) docker container stop container_ID (to stop the container)
+
+
+
+
+**Docker compose file (user for running the multiple containers together , don't need to add complex commands regarding the docker, etc. )
+docker-compose.yml  , compose.yaml 
+
+
+services:
+
+img:
+	build: .
+
+
+
+
+
+
+
+
+
+
+
+
+

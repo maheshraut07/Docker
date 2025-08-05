@@ -1,0 +1,170 @@
+Docker Compose Commands
+Start services defined in a docker-compose.yml file
+sh
+Copy code
+docker-compose up
+Start services in the background
+sh
+Copy code
+docker-compose up -d
+Stop services
+sh
+Copy code
+docker-compose down
+Rebuild services
+sh
+Copy code
+docker-compose up --build
+View logs of all services
+sh
+Copy code
+docker-compose logs
+View logs of a specific service
+sh
+Copy code
+docker-compose logs service_name
+# Example: docker-compose logs web
+List containers for the services defined in docker-compose.yml
+sh
+Copy code
+docker-compose ps
+Docker Volume Commands
+List all volumes
+sh
+Copy code
+docker volume ls
+Create a volume
+sh
+Copy code
+docker volume create volume_name
+# Example: docker volume create my_volume
+Remove a volume
+sh
+Copy code
+docker volume rm volume_name
+# Example: docker volume rm my_volume
+Remove all unused volumes
+sh
+Copy code
+docker volume prune
+Docker Network Commands
+List all networks
+sh
+Copy code
+docker network ls
+Create a network
+sh
+Copy code
+docker network create network_name
+# Example: docker network create my_network
+Connect a container to a network
+sh
+Copy code
+docker network connect network_name container_name_or_id
+# Example: docker network connect my_network my_container
+Disconnect a container from a network
+sh
+Copy code
+docker network disconnect network_name container_name_or_id
+# Example: docker network disconnect my_network my_container
+Remove a network
+sh
+Copy code
+docker network rm network_name
+# Example: docker network rm my_network
+Remove all unused networks
+sh
+Copy code
+docker network prune
+Docker System Commands
+Show Docker system information
+sh
+Copy code
+docker info
+Show Docker disk usage
+sh
+Copy code
+docker system df
+Remove all unused data (images, containers, volumes, networks)
+sh
+Copy code
+docker system prune
+Docker Container Management
+Restart a container
+sh
+Copy code
+docker restart container_name_or_id
+# Example: docker restart my_container
+Pause a container
+sh
+Copy code
+docker pause container_name_or_id
+# Example: docker pause my_container
+Unpause a container
+sh
+Copy code
+docker unpause container_name_or_id
+# Example: docker unpause my_container
+Rename a container
+sh
+Copy code
+docker rename old_name new_name
+# Example: docker rename my_container new_container_name
+Copy files/folders between a container and the local filesystem
+sh
+Copy code
+docker cp container_name_or_id:path/to/file /local/path
+# Example: docker cp my_container:/app/logs ./logs
+
+docker cp /local/path container_name_or_id:path/to/destination
+# Example: docker cp ./logs my_container:/app/logs
+Example Docker Compose File
+Here's an example docker-compose.yml file for a simple web application:
+
+yaml
+Copy code
+version: '3.8'
+
+services:
+  web:
+    image: node:latest
+    working_dir: /app
+    volumes:
+      - .:/app
+    ports:
+      - "5500:5500"
+    command: nodemon index.js
+    depends_on:
+      - db
+
+  db:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: mydatabase
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
+Running the Docker Compose File
+Navigate to the directory containing the docker-compose.yml file:
+
+sh
+Copy code
+cd /path/to/your/project
+Start the services:
+
+sh
+Copy code
+docker-compose up
+To start the services in the background:
+
+sh
+Copy code
+docker-compose up -d
+Stop and remove the services:
+
+sh
+Copy code
+docker-compose down
